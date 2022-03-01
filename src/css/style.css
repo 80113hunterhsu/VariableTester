@@ -1,0 +1,37 @@
+﻿
+/* Global CSS */
+.hider {
+    display: none !important;
+}
+body {
+    background-color: #7FA4F7;
+}
+
+/* Desktop */
+#main_window_col {
+    height: 80vh;
+}
+#main_window {
+    height: 70vh;
+}
+.main_center {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Tablet */
+@media screen and (max-width: 991px) {
+    #main_window {
+        *height: 75vh;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    #main_window {
+        *height: 70vh;
+    }
+}
