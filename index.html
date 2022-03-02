@@ -73,7 +73,7 @@
                       <label for="var2">Variable 2 (Optional)</label>
                       <input type="text" class="form-control" id="var2" placeholder="Variable 2">
                     </div>
-                    <a class="btn btn-success btn-lg" onClick="getData();sceneChange('scene_enterData', 'scene_videoSelect');">Select Video</a>
+                    <a class="btn btn-success btn-lg" href="#" role="button" onClick="getData();sceneChange('scene_enterData', 'scene_videoSelect');">Select Video</a>
                   </form>
                   <script>
                     var subjectName;
@@ -99,34 +99,78 @@
             </div>
             <!--Scene: videoSelect-->
             <div class="row justify-content-center col-10" id="scene_videoSelect" style="display: none;">
-              <div class="col-auto"><!--primary: blue, success: green-->
+              <div class="justify-content-center col-12"><!--primary: blue, success: green-->
+                <div style="display: flex; align-items: center; flex-direction: column;">
+                  <h4>Name: <span id="subjectNameShow"></span></h4>
+                  <h4>Variable: <span id="var1Show"></span><span id="var2Show"></span></h4>
+                </div>
                 <p>
-                  Name: <span id="subjectNameShow"></span><br>
-                  Variable: <span id="var1Show"></span><span id="var2Show"></span><br>
-                </p>
-                <p>
-                  <form>
-                    <div class="form-group">
-                      <label for="videoURL">Google Drive Video URL</label>
-                      <input type="url" class="form-control" id="videoURL" aria-describedby="videoURL" placeholder="https://drive.google.com/file/d/XXXXXXXX" required="required" pattern="https://drive.google.com/file/d/*/view?usp=sharing">
+                  <!--https://www.youtube.com/embed/1fPWr0d5zBE-->
+                  <div class="mt-2" id="vidSourceSelector" style="display: flex; flex-direction: column; align-items: center; ">
+                    <div class="h3">Please Select Video Source</div>
+                    <div>
+                      <a class="btn btn-primary btn-lg mr-1" href="#" role="button" onClick="getVidSource('vidURLform_googleDrive');">Google Drive</a>
+                      <a class="btn btn-primary btn-lg ml-1" href="#" role="button" onClick="getVidSource('vidURLform_youtube');">Youtube</a>
                     </div>
-                    <a class="btn btn-success btn-lg" onClick="getVideoURL(); sceneChange('scene_videoSelect', 'scene_startTest');">Start Test</a>
+                    <script>
+                      var vidSource;
+                      function vidSourceSync(vid) {
+                          vidSource = vid;
+                      }
+                      function getVidSource(vid) {
+                          document.getElementById(vid).style.display = "block";
+                          document.getElementById("vidSourceSelector").style.display = "none";
+                          vidSourceSync(vid);
+                      }
+                      function reselectVidSource(vid) {
+                          document.getElementById(vid).style.display = "none";
+                          document.getElementById("vidSourceSelector").style.display = "flex";
+                          vidSourceSync(vid);
+                      }
+                    </script>
+                  </div>
+                  <form>
+                    <div class="form-group" id="vidURLform_googleDrive" style="display: none;">
+                      <label for="videoURL">
+                          Google Drive Video URL
+                      </label>
+                      <input type="url" class="form-control" id="videoURL_googleDrive" aria-describedby="videoURL" placeholder="https://drive.google.com/file/d/XXXXXXXX/view?usp=sharing" required="required"><br>
+                      <p>
+                        <a class="btn btn-secondary btn-lg mr-1" href="#" role="button" onClick="reselectVidSource('vidURLform_googleDrive');">Back</a>
+                        <a class="btn btn-success btn-lg ml-1" href="#" role="button" onClick="getVideoURL('videoURL_googleDrive'); sceneChange('scene_videoSelect', 'scene_startTest');">Start Test</a>
+                      </p>
+                    </div>
+                    <div class="form-group" id="vidURLform_youtube" style="display: none;">
+                      <label for="videoURL">
+                          Youtube Video URL
+                      </label>
+                      <input type="url" class="form-control" id="videoURL_youtube" aria-describedby="videoURL" placeholder="https://youtu.be/XXXXXXXXXXX" required="required"><br>
+                      <p>
+                        <a class="btn btn-secondary btn-lg mr-1" href="#" role="button" onClick="reselectVidSource('vidURLform_youtube');">Back</a>
+                        <a class="btn btn-success btn-lg" href="#" role="button" onClick="getVideoURL('videoURL_youtube'); sceneChange('scene_videoSelect', 'scene_startTest');">Start Test</a>
+                      </p>
+                    </div>
                   </form>
                   <script>
                     var videoURL;
-                    function getVideoURL() {
-                        videoURL = document.getElementById("videoURL").value;
-                        videoURL = videoURL.substring(0, 66) + "preview";
+                    function vidSourcePreProcess(vidType, originURL) {
+                        if (vidType.includes("googleDrive")) {
+                            videoURL = videoURL.substring(0, 66) + "preview";
+                        }
+                        else if (vidType.includes("youtube")) {
+                            var ytPrefix = "https://www.youtube.com/embed/";
+                            videoURL = ytPrefix + videoURL.substring(17);
+                        }
+                    }
+                    function getVideoURL(vidTmp) {
+                        videoURL = document.getElementById(vidTmp).value;
+                        vidSourcePreProcess(vidSource, videoURL);
                         document.getElementById("vidPlayback").src = videoURL;
                     }
                   </script>
                 </p>
               </div>
             </div>
-            <!--
-<iframe src="https://drive.google.com/file/d/1QvDps6CdQPt_GHXyZo-sgxoseP9NI6DB/preview" width="640" height="480" allow="autoplay"></iframe>
-             https://drive.google.com/file/d/1QvDps6CdQPt_GHXyZo-sgxoseP9NI6DB/view?usp=sharing
-            -->
             <!--Scene: videoPlay-->
             <div class="row justify-content-center col-10" id="scene_startTest" style="display: none;">
               <div class="col-auto"><!--primary: blue, success: green-->

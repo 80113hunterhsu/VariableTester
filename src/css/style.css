@@ -21,6 +21,9 @@ body {
     justify-content: space-evenly;
     align-items: center;
 }
+#vidPlayback {
+    border-radius: 15px;
+}
 
 /* Tablet */
 @media screen and (max-width: 991px) {
