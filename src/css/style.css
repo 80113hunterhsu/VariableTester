@@ -6,6 +6,9 @@
 body {
     background-color: #7FA4F7;
 }
+.btn-success {
+    float: right;
+}
 
 /* Desktop */
 #main_window_col {
