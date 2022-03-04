@@ -255,25 +255,54 @@
                   <a class="btn btn-secondary btn-lg" href="#" role="button" onClick="sceneChange('scene_startTest', 'scene_videoSelect');">Back</a>
                   <a class="btn btn-success btn-lg" href="#" role="button" onClick="testStart();">Start Test</a>
                 </p>
+                <p id="onTest_scoreboard" style="display: none; justify-content: center;">
+                    Score: <span id="scoreboard"></span>
+                </p>
                 <p id="onTest" style="display: none; justify-content: center;">
-                  <a class="btn btn-success btn-lg mr-3" href="#" role="button" onClick="" style="float: none;">
+                  <a id="scoreMinus" class="btn btn-success btn-lg mr-3" href="#" role="button" onClick="scoring('KeyV');" style="float: none;">
                       <i class="fa-solid fa-minus"></i>
                   </a>
-                  <div id="score">score not started yet</div>
-                  <a class="btn btn-danger btn-lg ml-3" href="#" role="button" onClick="" style="float: none;">
+                  <a id="scorePlus" class="btn btn-danger btn-lg ml-3" href="#" role="button" onClick="scoring('KeyN');" style="float: none;">
                       <i class="fa-solid fa-plus"></i>
+                  </a>
+                </p>
+                <p id="endTest" style="display: none;">
+                  <a class="btn btn-primary btn-lg mr-3" href="#" role="button" onClick="sceneChange('scene_startTest', 'scene_testDone');" style="float: right;">
+                      Done
                   </a>
                 </p>
               </div>
               <script>
+                var scoreMinus, scorePlus;
+                var score = 0;
+                var scoreboard;
                 function testStart() {
+                    //show test buttons
                     document.querySelector("#preTest").style.display = "none";
                     document.querySelector("#onTest").style.display = "flex";
+                    document.querySelector("#endTest").style.display = "block";
+                    //show scoreboard
+                    document.querySelector("#onTest_scoreboard").style.display = "flex";
+                    scoreboard = document.querySelector("#scoreboard");
+                    setInterval(scoreUpdate, 100);
+                    //start listening for keystroke 'v' & 'n'
+                    window.addEventListener('keydown', keyScoring);    //in timestampRecord.js
+                    //get scoring buttons
+                    scoreMinus = document.querySelector("#scoreMinus");
+                    scorePlus = document.querySelector("#scorePlus");
+                    //starting score reset
+                    setInterval(resetScoreToZero, 1000);
                 }
               </script>
             </div>
+            <!--Scene: testDone-->
+            <div class="row justify-content-center" id="scene_testDone" style="display: none;">
+              <div class="col-auto"><!--primary: blue, success: green-->
+                <p><a class="btn btn-success btn-xl" href="#" role="button" onClick="sceneChange('scene_start', 'scene_enterData');">results</a> </p>
+              </div>
+            </div>
             
-            <p class="text-center">This is a demo of the Variable Tester web app</p>
+            <p class="text-center hider">This is a demo of the Variable Tester web app</p>
           </div>
         </div>
       </div>
