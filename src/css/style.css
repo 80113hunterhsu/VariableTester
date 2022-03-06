@@ -24,8 +24,14 @@ body {
     justify-content: space-evenly;
     align-items: center;
 }
-#vidPlayback {
+#loadingScreen {
+    width: 90% !important;
+}
+#vidPlayback_youtube, #vidPlayback_googleDrive {
     border-radius: 15px;
+}
+.fa-solid {
+    margin: 5px 10px !important;
 }
 
 /* Tablet */

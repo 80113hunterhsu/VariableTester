@@ -1,11 +1,5 @@
 //timestamp recorder for variable tester
 
-function getCurrentPlayTime() {
-    var time = document.querySelector(".ytp-time-current").innerHTML;
-    var time_array = time.split(":");
-    var seconds = (parseInt(time_array[0], 10) * 60) + (parseInt(time_array[1], 10));
-}
-
 function scoreUpdate() {
     if (score > 5) {
         score = 5;
@@ -47,3 +41,32 @@ function resetScoreToZero() {
     }
     //console.log(score);
 }
+
+
+var curSec = 0;
+function getCurrentPlayTime() {
+    var curTime = document.querySelector(".ytp-time-current").innerHTML;
+    var curTime_array = curTime.split(":");
+    curSec = (parseInt(curTime_array[0], 10) * 60) + (parseInt(curTime_array[1], 10));
+}
+
+var fullSec = 0;
+function getFullPlayTime() {
+    var fullTime = document.querySelector(".ytp-time-duration").innerHTML;
+    var fullTime_array = fullTime.split(":");
+    fullSec = (parseInt(fullTime_array[0], 10) * 60) + (parseInt(fullTime_array[1], 10));
+}
+
+function initScoreArray() {
+    getFullPlayTime();
+    var arrlen = fullSec;
+    for (var i = 0; i < arrlen; i++) {
+        scoreArr[i][0] = i;
+        scoreArr[i][1] = 0;
+    }
+    for (var i = 0; i < arrlen; i++) {
+        console.log(scoreArr[i][0] + ", " + scoreArr[i][1]);
+    }
+}
+
+
