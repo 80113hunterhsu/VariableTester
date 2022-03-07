@@ -69,21 +69,21 @@
                       <label for="subjectName">
                         Subject name
                         <span id="subjectNameRequired" style="display: none;">
-                          <b style="color: red;"><br>Please fill in Subject Name to continue. </b>
+                          <b style="color: red;"><br>Please fill in subject name to continue. </b>
                         </span>
                       </label>
                       <input type="text" class="form-control" id="subjectName" aria-describedby="subjectName" placeholder="Subject Name">
                     </div>
                     <div class="form-group">
                       <label for="var1">
-                        Variable 1
+                        Variable
                         <span id="var1Required" style="display: none;">
-                          <b style="color: red;"><br>Please fill in Variable 1 to continue. </b>
+                          <b style="color: red;"><br>Please fill in the variable to continue. </b>
                         </span>
                       </label>
-                      <input type="text" class="form-control" id="var1" placeholder="Variable 1">
+                      <input type="text" class="form-control" id="var1" placeholder="Variable">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hider">  <!--var 2 temporarily hidden-->
                       <label for="var2">Variable 2 (Optional)</label>
                       <input type="text" class="form-control" id="var2" placeholder="Variable 2">
                     </div>
@@ -92,6 +92,7 @@
                   <script>
                     var subjectName = 0;
                     var var1 = 0, var2 = 0;
+                    var fullVar;
                     function getData() {
                         subjectName = document.getElementById("subjectName").value;
                         var1 = document.getElementById("var1").value;
@@ -132,7 +133,8 @@
                         if (var2 != 0) {
                           var2string = " and " + var2;
                         }
-                        document.getElementById("instruction_section").innerHTML = "<p>Hello, <b>" + subjectName + "</b>. Today, we will be testing for a level of <b>" + var1 + var2string + "</b>. When you feel the most of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Increase button, which is marked with <code>+</code>. Alternately, when you are feeling less of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Decrease button, marked with <code>-</code>. </p><p>There will be an onscreen graphical representation of the level you are feeling in the form of a bar, directly right of the video feed. This bar will default to 0, over time. So, if you are feeling a lot of " + var1.toLowerCase() + var2string.toLowerCase() + ", don't feel afraid to repeatedly hit the mouse, click like wild! </p>";
+                        fullVar = var1 + var2string;
+                        document.getElementById("instruction_section").innerHTML = "<p>Hello, <b>" + subjectName + "</b>. Today, we will be testing for a level of <b>" + fullVar + "</b>. When you feel the most of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Increase button, which is marked with <code>+</code>. Alternately, when you are feeling less of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Decrease button, marked with <code>-</code>. </p><p>There will be an onscreen graphical representation of the level you are feeling in the form of a bar, directly right of the video feed. This bar will default to 0, over time. So, if you are feeling a lot of " + var1.toLowerCase() + var2string.toLowerCase() + ", don't feel afraid to repeatedly hit the mouse, click like wild! </p>";
                     }
                   </script>
                 </p>
@@ -300,6 +302,9 @@
               <script>
                 var scoreMinus, scorePlus;
                 var score = 0;
+                /*if (var2 != 0) {
+                    score = [0, 0];
+                }*/
                 var scoreboard;
                 function testStart() {
                     //show test buttons
