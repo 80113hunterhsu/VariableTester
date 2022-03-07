@@ -81,6 +81,7 @@ function endScoring() {
     vidPlayer.pause();
     var left = duration - curSec;
     scoreArr.splice(curSec + 1, left);
+    chartPreprocess();
     saveToCSV();
 }
 
