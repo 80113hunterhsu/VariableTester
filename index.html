@@ -295,13 +295,12 @@
                       <i class="fa-solid fa-plus"></i>
                   </a>
                 </p>
-                <a id="endTest" class="btn btn-primary btn-lg mr-3" href="#" role="button" onClick="sceneChange('scene_startTest', 'scene_testDone');" style="display: none; float: right;">Done</a>
+                <a id="endTest" class="btn btn-primary btn-lg mr-3" href="#" role="button" onClick="endScoring();sceneChange('scene_startTest', 'scene_testDone');" style="display: none; float: right;">Done</a>
               </div>
               <script>
                 var scoreMinus, scorePlus;
                 var score = 0;
                 var scoreboard;
-                var scoreArr;
                 function testStart() {
                     //show test buttons
                     document.querySelector("#preTest").style.display = "none";
@@ -310,13 +309,12 @@
                     //show scoreboard
                     document.querySelector("#onTest_scoreboard").style.display = "flex";
                     scoreboard = document.querySelector("#scoreboard");
-                    setInterval(scoreUpdate, 100);
                     //start listening for keystroke 'v' & 'n'
                     window.addEventListener('keydown', keyScoring);    //in timestampRecord.js
                     //start playing video
                     vidPlayer.play();
-                    //starting score reset
-                    var resetScore = setInterval(resetScoreToZero, 1000);
+                    //initialize score array
+                    initScoreArray();
                 }
               </script>
             </div>

@@ -8,6 +8,7 @@ function scoreUpdate() {
         score = -5;
     }
     scoreboard.innerHTML = score;
+    scoreRecord();
 }
 
 function keyScoring(key) {
@@ -42,31 +43,46 @@ function resetScoreToZero() {
     //console.log(score);
 }
 
-
 var curSec = 0;
+var duration = 0;
 function getCurrentPlayTime() {
-    var curTime = document.querySelector(".ytp-time-current").innerHTML;
-    var curTime_array = curTime.split(":");
-    curSec = (parseInt(curTime_array[0], 10) * 60) + (parseInt(curTime_array[1], 10));
+    curSec = parseInt(vidPlayer.currentTime);
+}
+function getDuration() {
+    duration = parseInt(vidPlayer.duration) + 1;
 }
 
-var fullSec = 0;
-function getFullPlayTime() {
-    var fullTime = document.querySelector(".ytp-time-duration").innerHTML;
-    var fullTime_array = fullTime.split(":");
-    fullSec = (parseInt(fullTime_array[0], 10) * 60) + (parseInt(fullTime_array[1], 10));
-}
-
+var scoreArr = [[0, 0]];
+var scoreUpdater;
+var resetScore;
+var scoringUpdate;
 function initScoreArray() {
-    getFullPlayTime();
-    var arrlen = fullSec;
-    for (var i = 0; i < arrlen; i++) {
-        scoreArr[i][0] = i;
-        scoreArr[i][1] = 0;
+    getDuration();
+    for (var i = 1; i <= duration; i++) {
+        scoreArr.push([i, 0]);
     }
-    for (var i = 0; i < arrlen; i++) {
+    /*
+    for (var i = 0; i <= duration; i++) {
         console.log(scoreArr[i][0] + ", " + scoreArr[i][1]);
-    }
+    }*/
+    scoreUpdater = setInterval(scoreUpdate, 100);   //update score to the scoreboard to display
+    resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
 }
 
+function scoreRecord() {
+    getCurrentPlayTime();
+    scoreArr[curSec][1] = score;
+}
 
+function endScoring() {
+    clearInterval(scoringUpdate);
+    clearInterval(resetScore);
+    clearInterval(scoreUpdater);
+    vidPlayer.pause();
+    var left = duration - curSec;
+    scoreArr.splice(curSec + 1, left);
+}
+
+function saveToCSV() {
+    var csvFile = "data:text/csv;charset=utf-8;";
+}
