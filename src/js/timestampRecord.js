@@ -98,10 +98,8 @@ function saveToCSV() {
     });
     
     var encodedUri = encodeURI(csvFile);
-    var link = document.createElement("a");
+    var link = document.querySelector("#csvDown");
     link.setAttribute("href", encodedUri);
     var fileName = subjectName + " " + var1 + ".csv";
     link.setAttribute("download", fileName);
-    document.querySelector("#scene_testDone").appendChild(link); 
-    link.click();
 }

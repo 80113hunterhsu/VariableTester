@@ -320,13 +320,21 @@
                     vidPlayer.play();
                     //initialize score array
                     initScoreArray();
+                    initChart();
                 }
               </script>
             </div>
             <!--Scene: testDone-->
-            <div class="row justify-content-center" id="scene_testDone" style="display: none;">
-              <div class="col-auto"><!--primary: blue, success: green-->
-                <p><a class="btn btn-success btn-xl" href="#" role="button" onClick="sceneChange('scene_start', 'scene_enterData');">results</a> </p>
+            <div class="row justify-content-center col-10" id="scene_testDone" style="display: none;">
+              <div class="col-12">
+                <p><center class="h2">Test Done! </center></p>
+                <div class="col-12">
+                  <canvas id="resultChart" style="width: 40vw;"></canvas>
+                </div>
+                <div class="col-12 mt-5" style="display: flex; justify-content: space-evenly;">
+                  <a id="csvDown" class="btn btn-success btn-lg" href="#" role="button">Export CSV</a>
+                  <a id="imgDown" class="btn btn-success btn-lg" href="#" role="button" onClick="saveToImg();">Export Chart</a>
+                </div>
               </div>
             </div>
           </div>
@@ -353,6 +361,8 @@
     <script src="src/js/sceneChange.js" type="text/javascript"></script>
     <!-- Timestamp Recorder -->
     <script src="src/js/timestampRecord.js" type="text/javascript"></script>
+    <!-- Chart.JS -->
+    <script src="src/js/chart.js"></script>
     <!-- Chart Output Processor -->
     <script src="src/js/chartOutput.js" type="text/javascript"></script>
   </body>

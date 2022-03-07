@@ -25,7 +25,7 @@ body {
     align-items: center;
 }
 #loadingScreen {
-    width: 90% !important;
+    *width: 90% !important;
 }
 #vidPlayback_youtube, #vidPlayback_googleDrive {
     border-radius: 15px;
