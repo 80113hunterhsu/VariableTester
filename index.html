@@ -13,7 +13,7 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a6b8c8e979.js" crossorigin="anonymous"></script>
     <!-- Youtube Video as HTML5 Video -->
-    <script src="https://cdn.jsdelivr.net/npm/@thelevicole/youtube-to-html5-loader@4.0.1/dist/YouTubeToHtml5.min.js"></script>
+    <script src="src/js/YouTubeToHtml5.js"></script>
   </head>
     
   <body>
@@ -134,7 +134,7 @@
                           var2string = " and " + var2;
                         }
                         fullVar = var1 + var2string;
-                        document.getElementById("instruction_section").innerHTML = "<p>Hello, <b>" + subjectName + "</b>. Today, we will be testing for a level of <b>" + fullVar + "</b>. When you feel the most of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Increase button, which is marked with <code>+</code>. Alternately, when you are feeling less of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Decrease button, marked with <code>-</code>. </p><p>There will be an onscreen graphical representation of the level you are feeling in the form of a bar, directly right of the video feed. This bar will default to 0, over time. So, if you are feeling a lot of " + var1.toLowerCase() + var2string.toLowerCase() + ", don't feel afraid to repeatedly hit the mouse, click like wild! </p>";
+                        document.getElementById("instruction_section").innerHTML = "<p>Hello, <b>" + subjectName + "</b>. Today, we will be testing for a level of <b>" + fullVar + "</b>. When you feel the most of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Increase button (or key V), which is marked with <code>+</code>. Alternately, when you are feeling less of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Decrease button (or key N), marked with <code>-</code>. </p><p>There will be an onscreen graphical representation of the level you are feeling in the form of a bar, directly right of the video feed. This bar will default to 0, over time. So, if you are feeling a lot of " + var1.toLowerCase() + var2string.toLowerCase() + ", don't feel afraid to repeatedly hit the mouse, click like wild! </p>";
                     }
                   </script>
                 </p>
@@ -347,6 +347,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
+            <p>Visit Our <a href="https://github.com/80113hunterhsu/variableTester" target="_blank">Github</a> Page</p>
             <p>Copyright © Variable Tester. All rights reserved.</p>
           </div>
         </div>
@@ -365,5 +366,7 @@
     <script src="src/js/chart.js"></script>
     <!-- Chart Output Processor -->
     <script src="src/js/chartOutput.js" type="text/javascript"></script>
+    <!-- webhost disclaimer hider -->
+    <script src="src/js/webhostDisclaimerHide.js" type="text/javascript"></script>
   </body>
 </html>
