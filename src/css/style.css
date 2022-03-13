@@ -27,8 +27,8 @@ body {
 #loadingScreen {
     *width: 90% !important;
 }
-#vidPlayback_youtube, #vidPlayback_googleDrive {
-    border-radius: 15px;
+#vidPlayback_youtube, #vidPlayback_googleDrive, #vidPlayback_local {
+    border-radius: 5px;
 }
 .fa-solid {
     margin: 5px 10px !important;

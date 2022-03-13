@@ -26,7 +26,7 @@
         <div class="col-12 main_center" id="main_window_col">
           <div class="col-10 jumbotron mb-auto mt-auto main_center" id="main_window">
             <!--Scene: videoSelect-->
-            <div class="row justify-content-center col-10" id="scene_videoSelect">
+            <div class="row justify-content-center col-10" id="scene_videoSelect" style="display: block;">
               <div class="justify-content-center col-12"><!--primary: blue, success: green-->
                 <div style="display: flex; align-items: center; flex-direction: column;">
                   <h4>Name: <span id="subjectNameShow"></span></h4>
@@ -37,7 +37,7 @@
                     <div class="h4">Please Select Video Source</div>
                     <div>
                       <a class="btn btn-primary btn-lg mr-1" href="#" role="button" onClick="getVidSource('vidURLform_local');">Local Video</a>
-                      <a class="btn btn-primary btn-lg mr-1" href="#" role="button" onClick="getVidSource('vidURLform_googleDrive');">Google Drive</a>
+                      <a class="btn btn-primary btn-lg mr-1 ml-1" href="#" role="button" onClick="getVidSource('vidURLform_googleDrive');">Google Drive</a>
                       <a class="btn btn-primary btn-lg ml-1" href="#" role="button" onClick="getVidSource('vidURLform_youtube');">Youtube</a>
                     </div>
                     <script>
@@ -60,14 +60,14 @@
                   <form>
                     <div class="form-group" id="vidURLform_local" style="display: none;">
                       <label for="videoURL">
-                          Local Video URL
+                          Local Video
                           <span id="localFileRequired" style="display: none;">
-                            <b style="color: red;"><br>Please fill in a Local video URL. </b>
+                            <b style="color: red;"><br>Please upload a video. </b>
                           </span>
                       </label>
-                      <input type="file" accept="video/*" class="form-control" id="videoURL_local" aria-describedby="videoURL" placeholder="" required="required"><br>
+                      <input type="file" accept="video/mp4" class="form-control" id="videoURL_local" aria-describedby="videoURL" placeholder="" required="required" style="height: fit-content;"><br>
                       <p>
-                        <a class="btn btn-secondary btn-lg mr-1" href="#" role="button" onClick="reselectVidSource('vidURLform_googleDrive');">Back</a>
+                        <a class="btn btn-secondary btn-lg mr-1" href="#" role="button" onClick="reselectVidSource('vidURLform_local');">Back</a>
                         <a class="btn btn-success btn-lg ml-1" href="#" role="button" onClick="getVideoURL('videoURL_local');">Preview</a>
                       </p>
                     </div>
@@ -134,7 +134,10 @@
                         videoURL = document.getElementById(vidTmp).value;
                         if (videoURL == 0) {
                             console.log("Please fill in Video URL to continue. ");
-                            if (vidSource.includes("googleDrive")) {
+                            if (vidSource.includes("local")) {
+                                document.querySelector("#localFileRequired").style.display = "inline";
+                            }
+                            else if (vidSource.includes("googleDrive")) {
                                 document.querySelector("#googleDriveURLRequired").style.display = "inline";
                             }
                             else if (vidSource.includes("youtube")) {
@@ -167,7 +170,7 @@
               </div>
             </div>
             <!--Scene: startTest-->
-            <div class="row justify-content-center col-8" id="scene_startTest" style="display: none;">
+            <div class="row justify-content-center col-12" id="scene_startTest" style="display: none;">
               <div class="col-auto"><!--primary: blue, success: green-->
                 <p>
                   <div class="embed-responsive embed-responsive-16by9" id="loadingScreen">
@@ -179,11 +182,11 @@
                         }
                     </style>
                     <div style="font-size: 1.5rem;">Loading Video...</div>
-                    <video id="vidPlayback_local" controls style="display: none;">
+                    <video id="vidPlayback_local" controls controlsList="nodownload" style="display: none;">
                       <source id="vidPlayback_local_src" src="" type="video/mp4">
                     </video>
-                    <video id="vidPlayback_googleDrive" src="" controls style="display: none;"></video>
-                    <video id="vidPlayback_youtube" data-src="" controls style="display: none;"></video>
+                    <video id="vidPlayback_googleDrive" src="" controls controlsList="nodownload" style="display: none;"></video>
+                    <video id="vidPlayback_youtube" data-src="" controls controlsList="nodownload" style="display: none;"></video>
                   </div>
                 </p>
                 <p id="preTest">
@@ -193,6 +196,9 @@
                 <p id="onTest_scoreboard" style="display: none; justify-content: center;">
                     Score: <span id="scoreboard"></span>
                 </p>
+                <div class="mt-3 mb-3" style="display: flex; justify-content: center;">
+                    <canvas id="scoreBoard" style="width: 90%; height: 3vh; border:1px solid black; display: none;"></canvas>
+                </div>
                 <p id="onTest" style="display: none; justify-content: center;">
                   <a id="scoreMinus" class="btn btn-success btn-sm mr-3" href="#" role="button" onClick="scoring('KeyV');" style="float: none;">
                       <i class="fa-solid fa-minus"></i>
@@ -214,9 +220,10 @@
                     //show test buttons
                     document.querySelector("#preTest").style.display = "none";
                     document.querySelector("#onTest").style.display = "flex";
+                    document.querySelector("#scoreBoard").style.display = "block";
                     document.querySelector("#endTest").style.display = "block";
                     //show scoreboard
-                    document.querySelector("#onTest_scoreboard").style.display = "flex";
+                    //document.querySelector("#onTest_scoreboard").style.display = "flex";
                     scoreboard = document.querySelector("#scoreboard");
                     //start listening for keystroke 'v' & 'n'
                     window.addEventListener('keydown', keyScoring);    //in timestampRecord.js
