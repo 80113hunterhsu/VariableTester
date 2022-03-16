@@ -10,6 +10,8 @@
     <link href="src/css/bootstrap-4.4.1.css" rel="stylesheet">
     <!-- Global Style -->
     <link href="src/css/style.css" rel="stylesheet">
+    <!-- score bar css -->
+    <link href="src/css/scoreBar.css" rel="stylesheet">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a6b8c8e979.js" crossorigin="anonymous"></script>
     <!-- Youtube Video as HTML5 Video -->
@@ -18,7 +20,7 @@
     
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="test.html">Variable Tester ver.1</a>
+      <a class="navbar-brand" href="test.html">Variable Tester ver.2</a>
     </nav>
       
     <div class="container mt-2">
@@ -194,10 +196,21 @@
                   <a class="btn btn-success btn-lg" href="#" role="button" onClick="testStart();">Start Test</a>
                 </p>
                 <p id="onTest_scoreboard" style="display: none; justify-content: center;">
-                    Score: <span id="scoreboard"></span>
+                    Score: <span></span>
                 </p>
-                <div class="mt-3 mb-3" style="display: flex; justify-content: center;">
-                    <canvas id="scoreBoard" style="width: 90%; height: 3vh; border:1px solid black; display: none;"></canvas>
+                <div id="scoreBoardContainer" class="mt-3 mb-3" style="display: flex; justify-content: center; display: none;">
+                    <div id="scoreBoard">
+                        <div id="scoreBar-5" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-4" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-3" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-2" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-1" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar1" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar2" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar3" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar4" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar5" class="scoreBar scoreBarPos"></div>
+                    </div>
                 </div>
                 <p id="onTest" style="display: none; justify-content: center;">
                   <a id="scoreMinus" class="btn btn-success btn-sm mr-3" href="#" role="button" onClick="scoring('KeyV');" style="float: none;">
@@ -219,8 +232,7 @@
                 function testStart() {
                     //show test buttons
                     document.querySelector("#preTest").style.display = "none";
-                    document.querySelector("#onTest").style.display = "flex";
-                    document.querySelector("#scoreBoard").style.display = "block";
+                    document.querySelector("#onTest").style.display = "flex"; document.querySelector("#scoreBoardContainer").style.display = "flex";
                     document.querySelector("#endTest").style.display = "block";
                     //show scoreboard
                     //document.querySelector("#onTest_scoreboard").style.display = "flex";

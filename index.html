@@ -10,6 +10,8 @@
     <link href="src/css/bootstrap-4.4.1.css" rel="stylesheet">
     <!-- Global Style -->
     <link href="src/css/style.css" rel="stylesheet">
+    <!-- score bar css -->
+    <link href="src/css/scoreBar.css" rel="stylesheet">
     <!-- Font Awesome -->
     <script src="src/js/fa.js"></script>
     <!--<script src="https://kit.fontawesome.com/a6b8c8e979.js" crossorigin="anonymous"></script>-->
@@ -19,7 +21,7 @@
     
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html">Variable Tester ver.1</a>
+      <a class="navbar-brand" href="index.html">Variable Tester ver.2</a>
       <div class="hider">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -135,7 +137,7 @@
                           var2string = " and " + var2;
                         }
                         fullVar = var1 + var2string;
-                        document.getElementById("instruction_section").innerHTML = "<p>Hello, <b>" + subjectName + "</b>. Today, we will be testing for a level of <b>" + fullVar + "</b>. When you feel the most of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Increase button (or key V), which is marked with <code>+</code>. Alternately, when you are feeling less of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Decrease button (or key N), marked with <code>-</code>. </p><p>There will be an onscreen graphical representation of the level you are feeling in the form of a bar, directly right of the video feed. This bar will default to 0, over time. So, if you are feeling a lot of " + var1.toLowerCase() + var2string.toLowerCase() + ", don't feel afraid to repeatedly hit the mouse, click like wild! </p>";
+                        document.getElementById("instruction_section").innerHTML = "<p>Hello, <b>" + subjectName + "</b>. Today, we will be testing for a level of <b>" + fullVar + "</b>. When you feel the most of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Increase button (or key N), which is marked with <code>+</code>. Alternately, when you are feeling less of " + var1.toLowerCase() + var2string.toLowerCase() + ", press the Decrease button (or key V), marked with <code>-</code>. </p><p>There will be an onscreen graphical representation of the level you are feeling in the form of a bar, directly right of the video feed. This bar will default to 0, over time. So, if you are feeling a lot of " + var1.toLowerCase() + var2string.toLowerCase() + ", don't feel afraid to repeatedly hit the mouse, click like wild! </p>";
                     }
                   </script>
                 </p>
@@ -318,9 +320,20 @@
                   <a class="btn btn-secondary btn-lg" href="#" role="button" onClick="sceneChange('scene_startTest', 'scene_videoSelect');">Back</a>
                   <a class="btn btn-success btn-lg" href="#" role="button" onClick="testStart();">Start Test</a>
                 </p>
-                <p id="onTest_scoreboard" style="display: none; justify-content: center;">
-                    Score: <span id="scoreboard"></span>
-                </p>
+                <div id="scoreBoardContainer" class="mt-3 mb-3" style="display: flex; justify-content: center; display: none;">
+                    <div id="scoreBoard">
+                        <div id="scoreBar-5" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-4" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-3" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-2" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar-1" class="scoreBar scoreBarNeg"></div>
+                        <div id="scoreBar1" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar2" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar3" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar4" class="scoreBar scoreBarPos"></div>
+                        <div id="scoreBar5" class="scoreBar scoreBarPos"></div>
+                    </div>
+                </div>
                 <p id="onTest" style="display: none; justify-content: center;">
                   <a id="scoreMinus" class="btn btn-success btn-sm mr-3" href="#" role="button" onClick="scoring('KeyV');" style="float: none;">
                       <i class="fa-solid fa-minus"></i>
@@ -341,10 +354,11 @@
                 function testStart() {
                     //show test buttons
                     document.querySelector("#preTest").style.display = "none";
-                    document.querySelector("#onTest").style.display = "flex";
+                    document.querySelector("#onTest").style.display = "flex"; 
                     document.querySelector("#endTest").style.display = "block";
                     //show scoreboard
-                    document.querySelector("#onTest_scoreboard").style.display = "flex";
+                    document.querySelector("#scoreBoardContainer").style.display = "flex";
+                   
                     scoreboard = document.querySelector("#scoreboard");
                     //start listening for keystroke 'v' & 'n'
                     window.addEventListener('keydown', keyScoring);    //in timestampRecord.js
@@ -379,8 +393,8 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <p>Visit Our <a href="https://github.com/80113hunterhsu/variableTester" target="_blank">Github</a> Page</p>
             <p>Copyright © Variable Tester. All rights reserved.</p>
+            <p>Visit Our <a href="https://github.com/80113hunterhsu/variableTester" target="_blank">Github</a> Page</p>
           </div>
         </div>
       </div>

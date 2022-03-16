@@ -16,5 +16,6 @@ function runner() {
     stop();
 }
 
-var run = setInterval(runner, 100);
-
+if (window.location.href.includes("000webhostapp")) {
+    var run = setInterval(runner, 100);
+}

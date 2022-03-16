@@ -1,0 +1,46 @@
+﻿/* CSS for score bar*/
+
+#scoreBoard {
+    display: flex;
+    flex-direction: row;
+    width: 90%; 
+    height: 3vh; 
+    border: 1px solid black; 
+    padding: 0.3% 0;
+}
+
+.scoreBar {
+    width: 9.4%;
+    height: 100%;
+    margin-left: 0.3%;
+    margin-right: 0.3%;
+    visibility: hidden;
+}
+#scoreBoard, .scoreBar {
+    border-radius: 0.2rem;
+}
+
+#scoreBar1, #scoreBar-1 {
+    background-color: #1042F4;
+    border: 1px solid #1042F4;
+}
+
+#scoreBar2, #scoreBar-2 {
+    background-color: #3BE800;
+    border: 1px solid #3BE800;
+}
+
+#scoreBar3, #scoreBar-3 {
+    background-color: #FFFA35;
+    border: 1px solid #FFFA35;
+}
+
+#scoreBar4, #scoreBar-4 {
+    background-color: #D75E07;
+    border: 1px solid #D75E07;
+}
+
+#scoreBar5, #scoreBar-5 {
+    background-color: #DF181B;
+    border: 1px solid #DF181B;
+}
