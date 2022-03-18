@@ -22,6 +22,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="index.html">Variable Tester ver.2</a>
+      <div id="onlineVer" style="display: none;">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,6 +32,16 @@
             <a class="nav-link" href="installer/getInstaller.html">Get Installer</a>
           </li>
         </ul>
+      </div>
+      <script>
+          function hideGetInstaller() {
+              var currentURL = window.location.href;
+              var online = document.getElementById("onlineVer");
+              if (currentURL.includes("github.io")) {
+                  online.style.display = "block";
+              }
+          }
+      </script>
       </div>
     </nav>
       
@@ -398,5 +409,8 @@
     <script src="src/js/chartOutput.js" type="text/javascript"></script>
     <!-- webhost disclaimer hider -->
     <script src="src/js/webhostDisclaimerHide.js" type="text/javascript"></script>
+    <script>
+        hideGetInstaller();
+    </script>
   </body>
 </html>
