@@ -9,6 +9,10 @@ body {
 .btn-success {
     float: right;
 }
+.scoreBTN {
+    width: 15px;
+    margin: 5px 10px;
+}
 
 /* Desktop */
 #main_window_col {
