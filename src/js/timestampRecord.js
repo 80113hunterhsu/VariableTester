@@ -125,26 +125,23 @@ function getDuration() {
     duration = parseInt(vidPlayer.duration) + 1;
 }
 
-var scoreArr = [[0, 0]];    //(time, score)
+var scoreArr = [[0, "0\'0\"", 0]];    //(time(s), time(m/s), score)
 var scoreUpdater;
 var resetScore;
 var scoringUpdate;
 function initScoreArray() {
     getDuration();
     for (var i = 1; i <= duration; i++) {
-        scoreArr.push([i, 0]);
+        var tmpMS = (parseInt(i / 60)) + "\'" + (i % 60) + "\"";
+        scoreArr.push([i, tmpMS, 0]);
     }
-    /*
-    for (var i = 0; i <= duration; i++) {
-        console.log(scoreArr[i][0] + ", " + scoreArr[i][1]);
-    }*/
     scoreUpdater = setInterval(scoreUpdate, 100);   //update score to the scoreboard to display
     resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
 }
 
 function scoreRecord() {
     getCurrentPlayTime();
-    scoreArr[curSec][1] = score;
+    scoreArr[curSec][2] = score;
 }
 
 function endScoring() {

@@ -25,7 +25,7 @@ for (var i = 0; i < 400; i++) {
 function chartPreprocess() {
     for (var i = 0; i <= curSec; i++) {
         scoreTime[i] = scoreArr[i][0];
-        scoreScore[i] = scoreArr[i][1];
+        scoreScore[i] = scoreArr[i][2];
     }
     secondToMS();
 }
