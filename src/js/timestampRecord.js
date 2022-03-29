@@ -61,7 +61,7 @@ function scoreboardDisplay(key) {
         }
     }
     else if (score == 0) {
-        console.log("in");
+        //console.log("in");
         scoreboardHidden();
     }
 }

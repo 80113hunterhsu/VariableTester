@@ -36,7 +36,7 @@ function secondToMS() {
     for (var i = 1; i <= curSec; i++) {
         var tmp = (parseInt(scoreTime[i] / 60)) + "分" + (scoreTime[i] % 60) + "秒";
         scoreTimeMS.push(tmp);
-        console.log(tmp);
+        //console.log(tmp);
     }
 }
 
