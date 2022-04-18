@@ -152,7 +152,7 @@ function endScoring() {
     var left = duration - curSec;
     scoreArr.splice(curSec + 1, left);
     chartPreprocess();
-    initChart();
+    //initChart();
     saveToCSV();
 }
 

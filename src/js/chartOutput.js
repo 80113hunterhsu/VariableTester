@@ -41,19 +41,38 @@ function secondToMS() {
 }
 
 //Chart.JS initialization
-const resultChart = document.getElementById('resultChart');
-function initChart() {
-    if (curSec < 10) {
-        resultChart.style.width = curSec * 80 + "px";
+const canvasRoot = document.getElementById('canvasRoot');
+var resultChart;
+var pub_skip_stat;
+function makeCanvas() {
+    var can = document.createElement("canvas");
+    can.setAttribute("id", "resultChart");
+    can.setAttribute("style", "height: 400px;");
+    canvasRoot.appendChild(can);
+    resultChart = document.getElementById('resultChart');
+}
+function initChart(skip_stat) {
+    if(resultChart) {
+        resultChart.remove();
     }
-    else if (curSec < 20) {
-        resultChart.style.width = curSec * 50 + "px";
+    makeCanvas();
+    pub_skip_stat = skip_stat
+    if (skip_stat == true) {
+        resultChart.style.width = "100%";
     }
-    else if (curSec < 60) {
-        resultChart.style.width = curSec * 40 + "px";
-    }
-    else if (curSec >= 60) {
-        resultChart.style.width = curSec * 30 + "px";
+    else {
+        if (curSec < 10) {
+            resultChart.style.width = curSec * 80 + "px";
+        }
+        else if (curSec < 20) {
+            resultChart.style.width = curSec * 50 + "px";
+        }
+        else if (curSec < 60) {
+            resultChart.style.width = curSec * 40 + "px";
+        }
+        else if (curSec >= 60) {
+            resultChart.style.width = curSec * 30 + "px";
+        }
     }
     const myChart = new Chart(resultChart, {
         type: 'line',
@@ -87,7 +106,7 @@ function initChart() {
                       text: 'Time'
                     }, 
                     ticks: {
-                        autoSkip: false
+                        autoSkip: skip_stat
                     }
                 }
             }
