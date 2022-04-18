@@ -51,12 +51,27 @@ function makeCanvas() {
     canvasRoot.appendChild(can);
     resultChart = document.getElementById('resultChart');
 }
+function chartBtnColor() {
+    var fullChart_btn = document.getElementById("fullChart");
+    var compressedChart_btn = document.getElementById("compressedChart");
+    if (pub_skip_stat == false) {
+        //full
+        fullChart_btn.setAttribute("class", "btn btn-success btn-md mr-2");
+        compressedChart_btn.setAttribute("class", "btn btn-dark btn-md ml-2");
+    }
+    else if (pub_skip_stat == true) {
+        //compressed
+        compressedChart_btn.setAttribute("class", "btn btn-success btn-md ml-2");
+        fullChart_btn.setAttribute("class", "btn btn-dark btn-md mr-2");
+    }
+}
 function initChart(skip_stat) {
+    pub_skip_stat = skip_stat;
+    chartBtnColor();
     if(resultChart) {
         resultChart.remove();
     }
     makeCanvas();
-    pub_skip_stat = skip_stat
     if (skip_stat == true) {
         resultChart.style.width = "100%";
     }
