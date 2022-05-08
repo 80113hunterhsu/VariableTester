@@ -1,5 +1,7 @@
 //timestamp recorder for variable tester
 
+var interval = 5;
+
 function scoreUpdate() {
     if (score > 5) {
         score = 5;
@@ -69,11 +71,11 @@ function scoreboardDisplay(key) {
 function keyClicked(key) {
     if (key === 'KeyV') {
         document.querySelector("#scoreMinus").style.backgroundColor = "#1c7530";
-        setTimeout(function () {document.querySelector("#scoreMinus").style.backgroundColor = "#28a745";}, 100);
+        setTimeout(function () {document.querySelector("#scoreMinus").style.backgroundColor = "#28a745";}, interval);
     }
     else if (key === 'KeyN') {
         document.querySelector("#scorePlus").style.backgroundColor = "#a81d2a";
-        setTimeout(function () {document.querySelector("#scorePlus").style.backgroundColor = "#dc3545";}, 100);
+        setTimeout(function () {document.querySelector("#scorePlus").style.backgroundColor = "#dc3545";}, interval);
     }
 }
 
@@ -135,7 +137,7 @@ function initScoreArray() {
         var tmpMS = (parseInt(i / 60)) + "\'" + (i % 60) + "\"";
         scoreArr.push([i, tmpMS, 0]);
     }
-    scoreUpdater = setInterval(scoreUpdate, 100);   //update score to the scoreboard to display
+    scoreUpdater = setInterval(scoreUpdate, interval);  //update score to the scoreboard to display
     resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
 }
 
