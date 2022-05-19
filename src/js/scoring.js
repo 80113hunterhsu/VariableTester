@@ -11,9 +11,7 @@ function scoring(key) {
         }
         scoreboardDisplay(key);
     }
-    setTimeout(function () {
-        resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
-    }, 1000);
+    resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
     //console.log(score);
 }
 

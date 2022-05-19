@@ -4,6 +4,7 @@ var time;
 var startTime;
 
 function scoreboardDisplay(key) {
+    console.log(score);
     if (score > 0) {
         if (key === 'KeyN') {   //increase
             scoreboardVisible();
@@ -55,5 +56,6 @@ function scoreboardDisplay(key) {
             for (var i = 0; i < allElements.length; i++) {
                 allElements[i].style.visibility = "hidden";
             }
+            console.log("0, all hidden");
         }
     }
