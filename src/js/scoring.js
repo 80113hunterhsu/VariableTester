@@ -9,7 +9,7 @@ function scoring(key) {
         else if (key === 'KeyN') {
             score++;
         }
-        scoreCorrect();
+        scoreCorrect(); 
         scoreboardDisplay(key);
     }
     resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
