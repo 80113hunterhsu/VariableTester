@@ -6,7 +6,6 @@ var duration = 0;
 var scoreArr = [[0, "0\'0\"", 0]];    //(time(s), time(m/s), score)
 var scoreCorrection;
 var resetScore;
-var scoringUpdate;
 function initScoreArray() {
     getDuration();
     for (var i = 1; i <= duration; i++) {
@@ -14,7 +13,6 @@ function initScoreArray() {
         scoreArr.push([i, tmpMS, 0]);
     }
     scoreCorrection = setInterval(scoreCorrect, interval);  //update score to the scoreboard to display
-    resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
 }
 
     function getDuration() {
@@ -57,7 +55,7 @@ function initScoreArray() {
     }
 
 function endScoring() {
-    clearInterval(scoringUpdate);
+    //clearInterval(scoringUpdate);
     clearInterval(resetScore);
     clearInterval(scoreCorrection);
     vidPlayer.pause();

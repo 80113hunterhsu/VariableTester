@@ -1,39 +1,11 @@
 var barItem;
 //var currentBarPos = 0;
-
-function scoreboardVisible() {
-    barItem = "scoreBar" + score;
-    document.getElementById(barItem).style.visibility = "visible";
-}
-
-function scoreboardHidden() {
-    if (score > 0) {
-        for (var i = 0; i < 5; i++) {
-            document.getElementsByClassName("scoreBarNeg")[i].style.visibility = "hidden";
-        }
-        for (var i = 5; i > score; i--) {
-            barItem = "scoreBar" + i;
-            document.getElementById(barItem).style.visibility = "hidden";
-        }
-    }
-    else if (score < 0) {
-        for (var i = 0; i < 5; i++) {
-            document.getElementsByClassName("scoreBarPos")[i].style.visibility = "hidden";
-        }
-        for (var i = -5; i < score; i++) {
-            barItem = "scoreBar" + i;
-            document.getElementById(barItem).style.visibility = "hidden";
-        }
-    }
-    else if (score == 0) {
-        document.getElementsByClassName("scoreBar").style.visibility = "hidden";
-    }
-}
+var time;
+var startTime;
 
 function scoreboardDisplay(key) {
-    //var barItem;
     if (score > 0) {
-        if (key === 'KeyN') {//increase
+        if (key === 'KeyN') {   //increase
             scoreboardVisible();
         }
         else if (key === 'KeyV') {  //decrease
@@ -41,7 +13,7 @@ function scoreboardDisplay(key) {
         }
     }
     else if (score < 0) {
-        if (key === 'KeyV') {//increase
+        if (key === 'KeyV') {   //increase
             scoreboardVisible();
         }
         else if (key === 'KeyN') {  //decrease
@@ -53,3 +25,35 @@ function scoreboardDisplay(key) {
         scoreboardHidden();
     }
 }
+
+    function scoreboardVisible() {
+        barItem = "scoreBar" + score;
+        document.getElementById(barItem).style.visibility = "visible";
+    }
+    
+    var allElements = document.getElementsByClassName("scoreBar");
+    function scoreboardHidden() {
+        if (score > 0) {
+            for (var i = 0; i < 5; i++) {
+                document.getElementsByClassName("scoreBarNeg")[i].style.visibility = "hidden";
+            }
+            for (var i = 5; i > score; i--) {
+                barItem = "scoreBar" + i;
+                document.getElementById(barItem).style.visibility = "hidden";
+            }
+        }
+        else if (score < 0) {
+            for (var i = 0; i < 5; i++) {
+                document.getElementsByClassName("scoreBarPos")[i].style.visibility = "hidden";
+            }
+            for (var i = -5; i < score; i++) {
+                barItem = "scoreBar" + i;
+                document.getElementById(barItem).style.visibility = "hidden";
+            }
+        }
+        else if (score == 0) {
+            for (var i = 0; i < allElements.length; i++) {
+                allElements[i].style.visibility = "hidden";
+            }
+        }
+    }

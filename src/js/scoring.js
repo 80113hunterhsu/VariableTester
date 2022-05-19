@@ -1,14 +1,19 @@
 //scoring main function (called from scoring button in index.html)
+
 function scoring(key) {
+    clearInterval(resetScore);
     if (score <= 5 && score >= -5) {
         if (key === 'KeyV') {
             score--;
         }
-        if (key === 'KeyN') {
+        else if (key === 'KeyN') {
             score++;
         }
         scoreboardDisplay(key);
     }
+    setTimeout(function () {
+        resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
+    }, 1000);
     //console.log(score);
 }
 
@@ -25,12 +30,12 @@ function keyScoring(key) {
 
 function keyClicked(key) {
     if (key === 'KeyV') {
-        document.querySelector("#scoreMinus").style.backgroundColor = "#1c7530";
-        setTimeout(function () {document.querySelector("#scoreMinus").style.backgroundColor = "#28a745";}, interval);
+        document.querySelector("#scoreMinus").style.backgroundColor = "#218838";
+        setTimeout(function () {document.querySelector("#scoreMinus").style.backgroundColor = "#28a745";}, 50);
     }
     else if (key === 'KeyN') {
-        document.querySelector("#scorePlus").style.backgroundColor = "#a81d2a";
-        setTimeout(function () {document.querySelector("#scorePlus").style.backgroundColor = "#dc3545";}, interval);
+        document.querySelector("#scorePlus").style.backgroundColor = "#c82333";
+        setTimeout(function () {document.querySelector("#scorePlus").style.backgroundColor = "#dc3545";}, 50);
     }
 }
 
