@@ -9,11 +9,26 @@ function scoring(key) {
         else if (key === 'KeyN') {
             score++;
         }
+        scoreCorrect();
         scoreboardDisplay(key);
     }
     resetScore = setInterval(resetScoreToZero, 1000);   //reset score to zero per 1 second
     //console.log(score);
 }
+    function resetScoreToZero() {
+        if (score > 0) {
+            scoreboardHidden();
+            score--;
+        }
+        else if (score < 0) {
+            scoreboardHidden();
+            score++;
+        }
+        else if (score == 0) {
+            scoreboardHidden();
+        }
+        //console.log(score);
+    }
 
 function keyScoring(key) {
     //console.log("key: " + key.code);

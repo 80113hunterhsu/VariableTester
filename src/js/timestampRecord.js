@@ -14,11 +14,9 @@ function initScoreArray() {
     }
     scoreCorrection = setInterval(scoreCorrect, interval);  //update score to the scoreboard to display
 }
-
     function getDuration() {
         duration = parseInt(vidPlayer.duration) + 1;
     }
-
     function scoreCorrect() {
         if (score > 5) {
             score = 5;
@@ -30,7 +28,6 @@ function initScoreArray() {
         //scoreboardDisplay();
         scoreRecord();
     }
-
         function scoreRecord() {
             getCurrentPlayTime();
             scoreArr[curSec][2] = score;
@@ -38,21 +35,6 @@ function initScoreArray() {
             function getCurrentPlayTime() {
                 curSec = parseInt(vidPlayer.currentTime);
             }
-
-    function resetScoreToZero() {
-        if (score > 0) {
-            scoreboardHidden();
-            score--;
-        }
-        else if (score < 0) {
-            scoreboardHidden();
-            score++;
-        }
-        else if (score == 0) {
-            scoreboardHidden();
-        }
-        //console.log(score);
-    }
 
 function endScoring() {
     //clearInterval(scoringUpdate);
