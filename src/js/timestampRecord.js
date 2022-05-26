@@ -1,6 +1,6 @@
 //timestamp recorder for variable tester
 
-var interval = 5;
+var interval = 1;
 var curSec = 0;
 var duration = 0;
 var scoreArr = [[0, "0\'0\"", 0]];    //(time(s), time(m/s), score)
