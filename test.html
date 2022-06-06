@@ -6,289 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Variable Tester</title>
     <link rel="icon" href="src/images/favicon.png">
-    <!-- Bootstrap -->
-    <link href="src/css/bootstrap-4.4.1.css" rel="stylesheet">
-    <!-- Global Style -->
-    <link href="src/css/style.css" rel="stylesheet">
-    <!-- score bar css -->
-    <link href="src/css/scoreBar.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/a6b8c8e979.js" crossorigin="anonymous"></script>
-    <!-- Youtube Video as HTML5 Video -->
-    <script src="src/js/YouTubeToHtml5.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        width: 100vw;
+      }
+      .chartBox {
+        width: 100%;
+      }
+    </style>
   </head>
     
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="test.html">Variable Tester ver.2</a>
-    </nav>
-      
-    <div class="container mt-2">
-      <div class="row justify-content-center">
-        <div class="col-12 main_center" id="main_window_col">
-          <div class="col-10 jumbotron mb-auto mt-auto main_center" id="main_window">
-            <!--Scene: videoSelect-->
-            <div class="row justify-content-center col-10" id="scene_videoSelect" style="display: block;">
-              <div class="justify-content-center col-12"><!--primary: blue, success: green-->
-                <div style="display: flex; align-items: center; flex-direction: column;">
-                  <h4>Name: <span id="subjectNameShow"></span></h4>
-                  <h4>Variable: <span id="var1Show"></span><span id="var2Show"></span></h4>
-                </div>
-                <p>
-                  <div class="mt-5" id="vidSourceSelector" style="display: flex; flex-direction: column; align-items: center; ">
-                    <div class="h4">Please Select Video Source</div>
-                    <div>
-                      <a class="btn btn-primary btn-lg mr-1" href="#" role="button" onClick="getVidSource('vidURLform_local');">Local Video</a>
-                      <a class="btn btn-primary btn-lg mr-1 ml-1" href="#" role="button" onClick="getVidSource('vidURLform_googleDrive');">Google Drive</a>
-                      <a class="btn btn-primary btn-lg ml-1" href="#" role="button" onClick="getVidSource('vidURLform_youtube');">Youtube</a>
-                    </div>
-                    <script>
-                      var vidSource = 0;
-                      function vidSourceSync(vid) {
-                          vidSource = vid;
-                      }
-                      function getVidSource(vid) {
-                          document.getElementById(vid).style.display = "block";
-                          document.getElementById("vidSourceSelector").style.display = "none";
-                          vidSourceSync(vid);
-                      }
-                      function reselectVidSource(vid) {
-                          document.getElementById(vid).style.display = "none";
-                          document.getElementById("vidSourceSelector").style.display = "flex";
-                          document.getElementById(vidPlayback_ID).style.display = "none";
-                      }
-                    </script>
-                  </div>
-                  <form>
-                    <div class="form-group" id="vidURLform_local" style="display: none;">
-                      <label for="videoURL">
-                          Local Video
-                          <span id="localFileRequired" style="display: none;">
-                            <b style="color: red;"><br>Please upload a video. </b>
-                          </span>
-                      </label>
-                      <input type="file" accept="video/mp4" class="form-control" id="videoURL_local" aria-describedby="videoURL" placeholder="" required="required" style="height: fit-content;"><br>
-                      <p>
-                        <a class="btn btn-secondary btn-lg mr-1" href="#" role="button" onClick="reselectVidSource('vidURLform_local');">Back</a>
-                        <a class="btn btn-success btn-lg ml-1" href="#" role="button" onClick="getVideoURL('videoURL_local');">Preview</a>
-                      </p>
-                    </div>
-                    <div class="form-group" id="vidURLform_googleDrive" style="display: none;">
-                      <label for="videoURL">
-                          Google Drive Video URL
-                          <span id="googleDriveURLRequired" style="display: none;">
-                            <b style="color: red;"><br>Please fill in a Google Drive video URL. </b>
-                          </span>
-                      </label>
-                      <input type="url" class="form-control" id="videoURL_googleDrive" aria-describedby="videoURL" placeholder="https://drive.google.com/file/d/XXXXXXXX/view?usp=sharing" required="required"><br>
-                      <p>
-                        <a class="btn btn-secondary btn-lg mr-1" href="#" role="button" onClick="reselectVidSource('vidURLform_googleDrive');">Back</a>
-                        <a class="btn btn-success btn-lg ml-1" href="#" role="button" onClick="getVideoURL('videoURL_googleDrive');">Preview</a>
-                      </p>
-                    </div>
-                    <div class="form-group" id="vidURLform_youtube" style="display: none;">
-                      <label for="videoURL">
-                          Youtube Video URL
-                          <span id="youtubeURLRequired" style="display: none;">
-                            <b style="color: red;"><br>Please fill in a Youtube video URL. </b>
-                          </span>
-                      </label>
-                      <input type="url" class="form-control" id="videoURL_youtube" aria-describedby="videoURL" placeholder="https://youtu.be/XXXXXXXXXXX" required="required"><br>
-                      <p>
-                        <a class="btn btn-secondary btn-lg mr-1" href="#" role="button" onClick="reselectVidSource('vidURLform_youtube');">Back</a>
-                        <a class="btn btn-success btn-lg" href="#" role="button" onClick="getVideoURL('videoURL_youtube');">Preview</a>
-                      </p>
-                    </div>
-                  </form>
-                  <script>
-                    var videoURL = 0;
-                    var vidPlayback_ID = 0;
-                    var vidPlayer;
-                    function showPlayer() {
-                        vidPlayer.style.display = "block";
-                    }
-                    function vidSourcePreProcess(originURL) {
-                        if (vidSource.includes("local")) {
-                            //setPlayerID
-                            vidPlayback_ID = "vidPlayback_local";
-                            vidSRC_ID = "vidPlayback_local_src";
-                            document.getElementById(vidSRC_ID).src = videoURL;
-                            document.getElementById(vidPlayback_ID).load(); //video element load video
-                        }
-                        else if (vidSource.includes("googleDrive")) {
-                            var gdPrefix = "https://drive.google.com/uc?id=";
-                            videoURL = gdPrefix + videoURL.substring(32, 65);
-                            //setPlayerID
-                            vidPlayback_ID = "vidPlayback_googleDrive";
-                            document.getElementById(vidPlayback_ID).src = videoURL;
-                            document.getElementById(vidPlayback_ID).load(); //video element load video
-                        }
-                        else if (vidSource.includes("youtube")) {
-                            var ytPrefix = "https://www.youtube.com/embed/";
-                            videoURL = ytPrefix + videoURL.substring(17) + "?enablejsapi=1";
-                            //setPlayerID
-                            vidPlayback_ID = "vidPlayback_youtube";
-                            document.getElementById(vidPlayback_ID).dataset.src = videoURL;
-                            ytToHtml();
-                        }
-                    }
-                    function getVideoURL(vidTmp) {
-                        videoURL = document.getElementById(vidTmp).value;
-                        if (videoURL == 0) {
-                            console.log("Please fill in Video URL to continue. ");
-                            if (vidSource.includes("local")) {
-                                document.querySelector("#localFileRequired").style.display = "inline";
-                            }
-                            else if (vidSource.includes("googleDrive")) {
-                                document.querySelector("#googleDriveURLRequired").style.display = "inline";
-                            }
-                            else if (vidSource.includes("youtube")) {
-                                document.querySelector("#youtubeURLRequired").style.display = "inline";
-                            }
-                        }
-                        else {
-                            if (vidSource.includes("local")) {
-                                var file = document.getElementById(vidTmp).files[0];
-                                videoURL = URL.createObjectURL(file);
-                            }
-                            vidSourcePreProcess(videoURL);
-                            sceneChange('scene_videoSelect', 'scene_startTest');
-                            vidPlayer = document.getElementById(vidPlayback_ID);
-                            showPlayer();
-                        }
-                    }
-                    function ytToHtml() {
-                        var player = new YouTubeToHtml5({
-                            autoload: false,  // Disable loading videos on init, `.load()` method is required.
-                            withAudio: true, 
-                            selector: '#vidPlayback_youtube',
-                            attribute: 'data-src'
-                        });
-                        
-                        player.load();
-                    }
-                  </script>
-                </p>
-              </div>
-            </div>
-            <!--Scene: startTest-->
-            <div class="row justify-content-center col-12" id="scene_startTest" style="display: none;">
-              <div class="col-auto"><!--primary: blue, success: green-->
-                <p>
-                  <div class="embed-responsive embed-responsive-16by9" id="loadingScreen">
-                    <style>
-                        #loadingScreen {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
-                    </style>
-                    <div style="font-size: 1.5rem;">Loading Video...</div>
-                    <video id="vidPlayback_local" controls controlsList="nodownload" style="display: none;">
-                      <source id="vidPlayback_local_src" src="" type="video/mp4">
-                    </video>
-                    <video id="vidPlayback_googleDrive" src="" controls controlsList="nodownload" style="display: none;"></video>
-                    <video id="vidPlayback_youtube" data-src="" controls controlsList="nodownload" style="display: none;"></video>
-                  </div>
-                </p>
-                <p id="preTest">
-                  <a class="btn btn-secondary btn-lg" href="#" role="button" onClick="sceneChange('scene_startTest', 'scene_videoSelect');">Back</a>
-                  <a class="btn btn-success btn-lg" href="#" role="button" onClick="testStart();">Start Test</a>
-                </p>
-                <p id="onTest_scoreboard" style="display: none; justify-content: center;">
-                    Score: <span></span>
-                </p>
-                <div id="scoreBoardContainer" class="mt-3 mb-3" style="display: flex; justify-content: center; display: none;">
-                    <div id="scoreBoard">
-                        <div id="scoreBar-5" class="scoreBar scoreBarNeg"></div>
-                        <div id="scoreBar-4" class="scoreBar scoreBarNeg"></div>
-                        <div id="scoreBar-3" class="scoreBar scoreBarNeg"></div>
-                        <div id="scoreBar-2" class="scoreBar scoreBarNeg"></div>
-                        <div id="scoreBar-1" class="scoreBar scoreBarNeg"></div>
-                        <div id="scoreBar1" class="scoreBar scoreBarPos"></div>
-                        <div id="scoreBar2" class="scoreBar scoreBarPos"></div>
-                        <div id="scoreBar3" class="scoreBar scoreBarPos"></div>
-                        <div id="scoreBar4" class="scoreBar scoreBarPos"></div>
-                        <div id="scoreBar5" class="scoreBar scoreBarPos"></div>
-                    </div>
-                </div>
-                <p id="onTest" style="display: none; justify-content: center;">
-                  <a id="scoreMinus" class="btn btn-success btn-sm mr-3" href="#" role="button" onClick="scoring('KeyV');" style="float: none;">
-                      <i class="fa-solid fa-minus"></i>
-                  </a>
-                  <a id="scorePlus" class="btn btn-danger btn-sm ml-3" href="#" role="button" onClick="scoring('KeyN');" style="float: none;">
-                      <i class="fa-solid fa-plus"></i>
-                  </a>
-                </p>
-                <a id="endTest" class="btn btn-primary btn-lg mr-3" href="#" role="button" onClick="endScoring();sceneChange('scene_startTest', 'scene_testDone');" style="display: none; float: right;">Done</a>
-              </div>
-              <script>
-                var scoreMinus, scorePlus;
-                var score = 0;
-                /*if (var2 != 0) {
-                    score = [0, 0];
-                }*/
-                var scoreboard;
-                function testStart() {
-                    //test
-                    var1 = "Anxiety";
-                    subjectName = "Hunter";
-                    fullVar = var1;
-                    //show test buttons
-                    document.querySelector("#preTest").style.display = "none";
-                    document.querySelector("#onTest").style.display = "flex"; document.querySelector("#scoreBoardContainer").style.display = "flex";
-                    document.querySelector("#endTest").style.display = "block";
-                    //show scoreboard
-                    //document.querySelector("#onTest_scoreboard").style.display = "flex";
-                    scoreboard = document.querySelector("#scoreboard");
-                    //start listening for keystroke 'v' & 'n'
-                    window.addEventListener('keydown', keyScoring);    //in timestampRecord.js
-                    //start playing video
-                    vidPlayer.play();
-                    //initialize score array
-                    initScoreArray();
-                }
-              </script>
-            </div>
-            <!--Scene: testDone-->
-            <div class="row justify-content-center col-12" id="scene_testDone" style="display: none;">
-              <div class="col-12">
-                <div class="col-12" style="overflow-x: auto; overflow-y: hidden;">
-                  <canvas id="resultChart" style="height: 400px;"></canvas>
-                </div>
-                <div class="col-12 mt-5" style="display: flex; justify-content: space-evenly;">
-                  <a id="csvDown" class="btn btn-success btn-md" href="#" role="button">Export CSV</a>
-                  <a id="imgDown" class="btn btn-success btn-md" href="#" role="button" onClick="saveToImg();">Export Chart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <hr>
-    <footer class="text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <p>Copyright © Variable Tester. All rights reserved.</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="src/js/jquery-3.4.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="src/js/popper.min.js"></script>
-    <script src="src/js/bootstrap-4.4.1.js"></script>
-    <!-- Scene Changer -->
-    <script src="src/js/sceneChange.js" type="text/javascript"></script>
-    <!-- Timestamp Recorder -->
-    <script src="src/js/timestampRecord.js" type="text/javascript"></script>
-    <!-- Chart.JS -->
-    <script src="src/js/chart.js"></script>
-    <!-- Chart Output Processor -->
-    <script src="src/js/chartOutput.js" type="text/javascript"></script>
+    <div class="chartBox">
+      <canvas id="myChart"></canvas>
+    </div>
+     
+    <script>
+      //setup
+      const data = {
+        labels: [
+          'Red',
+          'Blue',
+          'Yellow'
+        ],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [300, 50, 100],
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+          ],
+          hoverOffset: 4
+        }]
+      };
+
+      //plugin
+      const plugin = {
+        id: 'custom_canvas_background_color',
+        beforeDraw: (chart) => {
+          const ctx = chart.canvas.getContext('2d');
+          ctx.save();
+          ctx.globalCompositeOperation = 'destination-over';
+          ctx.fillStyle = '#1A2B';
+          ctx.fillRect(0, 0, chart.width, chart.height);
+          ctx.restore();
+        }
+      };
+
+      //config
+      const config = {
+        type: 'doughnut',
+        data: data,
+        plugins: [plugin],
+      };
+
+      //render
+      const myChart = new Chart(
+        document.getElementById('myChart'), 
+        config
+      );
+
+    </script>
   </body>
 </html>

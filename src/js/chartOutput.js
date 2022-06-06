@@ -1,4 +1,4 @@
-﻿//line chart output
+//line chart output
 var scoreTime = [0];
 var scoreScore = [0];
 //test
@@ -89,7 +89,80 @@ function initChart(skip_stat) {
             resultChart.style.width = curSec * 30 + "px";
         }
     }
-    const myChart = new Chart(resultChart, {
+
+    //chart
+    //data
+    const data = {
+        labels: scoreTimeMS,
+        datasets: [{
+            label: var1,
+            data: scoreScore,
+            backgroundColor: '#28a745',
+            borderColor: '#28a745',
+            borderWidth: 1, 
+            pointRadius: 1.5
+        }]
+    };
+    //plugin
+    const plugin = {
+        id: 'custom_canvas_background_color',
+        beforeDraw: (chart) => {
+            const ctx = chart.canvas.getContext('2d');
+            ctx.save();
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.fillStyle = 'rgb(255, 255, 255)';
+            ctx.fillRect(0, 0, chart.width, chart.height);
+            ctx.restore();
+        }
+    };
+
+    //option
+    const options = {
+        responsive: false,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Level'
+                },
+                suggestedMin: -5,
+                suggestedMax: 5,
+                grid: {
+                    lineWidth: function(context) {
+                        if (context.tick.value == '0') {
+                            return 10;
+                        }
+                        else {
+                            return 1;
+                        }
+                    }
+                }
+            },
+            x: {
+                beginAtZero: true, 
+                title: {
+                    display: true,
+                    text: 'Time'
+                }, 
+                ticks: {
+                    autoSkip: skip_stat
+                }
+            }
+        }
+    }
+
+    //config
+    const config = {
+        type: 'line',
+        data: data,
+        options: options,
+        plugins: [plugin],
+    };
+    
+    //render
+    const myChart = new Chart(resultChart, config);
+    console.log("done");
+    /* {
         type: 'line',
         data: {
             labels: scoreTimeMS,
@@ -125,8 +198,19 @@ function initChart(skip_stat) {
                     }
                 }
             }
-        }
-    });
+        }, 
+        plugins: [{
+            id: "custom_canvas_background_color", 
+            beforeDraw: (chart) => {
+                const ctx = chart.canvas.getContext('2d');
+                ctx.save();
+                ctx.globalCompositeOperation = 'destination-over';
+                ctx.fillStyle = 'lightGreen';
+                ctx.fillRect(0, 0, chart.width. chart.height);
+                ctx.restore();
+            }
+        }]
+    } );*/
 }
 
 function saveToImg() {
