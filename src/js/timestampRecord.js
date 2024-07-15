@@ -38,6 +38,7 @@ function initScoreArray() {
 
 function endScoring() {
     //clearInterval(scoringUpdate);
+    document.querySelector("#endTest").style.display = "none";
     clearInterval(resetScore);
     clearInterval(scoreCorrection);
     vidPlayer.pause();

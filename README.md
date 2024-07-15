@@ -6,9 +6,10 @@
 
 ## Updated Functionalities
  - Video Source: No longer limited to AVI, you can select any video from the sources below
+   - Local File
    - Google Drive
    - Youtube
- - Testing button updated: Now support Key Stroke (v for minus, n for plus)
+ - Testing button updated: Now support Key Stroke (v for minus, n for plus), and Enter for ending the current test session
  - Test Result Output: CSV and JPG file, same as before, but with better quality
    - Name and Variable implemented to the test result
    - Automatically adds test date to the result csv file

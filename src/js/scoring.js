@@ -36,8 +36,9 @@ function keyScoring(key) {
         scoring(key.code);
         keyClicked(key.code);
     }
-    if (key.code === 'Space') {
-        //
+    if (key.code === 'Enter' && document.querySelector("#endTest").style.display !== 'none') {
+        document.querySelector("#endTest").click();
+        console.log('endTest clicked');
     }
 }
 
