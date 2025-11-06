@@ -1,5 +1,8 @@
+> ## Variable Tester v2 is out now! Visit [here](https://github.com/80113hunterhsu/variable-tester-v2) to get the new version! 
+
 # VariableTester
  A new version of the Anion Variable Tester
+ > No longer under maintenance, please use [Variable Tester v2](https://github.com/80113hunterhsu/variable-tester-v2) instead.
 
 ## Original Version
 [Idiodynamic Software](https://petermacintyre.weebly.com/idiodynamic-software.html)
